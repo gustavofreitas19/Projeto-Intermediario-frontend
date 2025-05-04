@@ -194,6 +194,7 @@ let pontosTotais = 0;
 const questionElement = document.getElementById("question");
 const optionsContainer = document.querySelector(".options");
 const feedback = document.getElementById("feedback");
+const loader = document.getElementById("loader-confirm");
 const confirmButton = document.getElementById("confirm-button");
 const pontosDisplay = document.getElementById("pontos");
 const contadorPerguntasElement = document.getElementById("contador-perguntas");
@@ -270,17 +271,19 @@ confirmButton.addEventListener("click", () => {
   feedback.textContent = `${mensagemFeedback} Pontuação: ${pontosTotais}`;
   feedback.classList.remove("hidden");
 
+  loader.classList.add('active');
   setTimeout(() => {
     perguntaAtual++;
 
     if (perguntaAtual < perguntas.length) {
+      loader.classList.remove('active');
       mostrarPergunta(perguntaAtual);  // Mostra a próxima pergunta
     } else {
       questionElement.textContent = "Fim do jogo! Obrigado por jogar.";
       optionsContainer.innerHTML = "";
       confirmButton.disabled = true;
     }
-  }, 1000);
+  }, 7900);
 });
 
 if (perguntaAtual < perguntas.length) {
