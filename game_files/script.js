@@ -1,7 +1,8 @@
 let progresso = {
   saude: 0,
   foco: 0,
-  financas: 0
+  financas: 0,
+  ética: 0
 };
 const pontuacaoSalva = localStorage.getItem("decidaAiPontuacao");
 const progressoSalvo = localStorage.getItem("decidaAiProgresso");
@@ -14,177 +15,289 @@ if (pontuacaoSalva && progressoSalvo) {
 
 const perguntas = [
   {
-    texto: "Você acordou atrasado para o trabalho. O que faz?",
-    opcoes: ["Pula o café da manhã e corre para o trabalho", "Faz uma pausa para um bom café, mesmo sabendo que vai se atrasar", "Relaxar é ótimo, mas lembre-se que a pontualidade é importante"],
-    feedbacks: [
-      "Café é essencial, mas cuidado com o estresse pela pressa!",
-      "Um bom café nunca é demais, mas talvez um pouco de pressa ajude.",
-      "Relaxar é ótimo, mas lembre-se que a pontualidade é importante."
-    ],
-    pontuacoes: [1, 2, 3],
-    categoria: ["foco", "saude", "financas"]
-  },
-  {
-    texto: "Você tem 1 hora livre. O que faz?",
-    opcoes: ["Fica no sofá vendo memes", "Organiza sua casa e coloca a vida em ordem", "Sai para caminhar e dar uma volta no bairro"],
-    feedbacks: [
-      "Cuidado com o tempo perdido nas redes sociais.",
-      "Ótimo! Organização traz paz de espírito.",
-      "Exercício é sempre bom, mas não exagere na caminhada."
-    ],
-    pontuacoes: [0, 3, 2],
-    categoria: ["foco", "saude", "financas"]
-  },
-  {
-    texto: "Você ganhou 100 reais. O que faz com o dinheiro?",
-    opcoes: ["Compra algo que você estava querendo há muito tempo", "Põe na poupança e começa a economizar", "Dá para alguém que precisa mais que você"],
-    feedbacks: [
-      "Compras são divertidas, mas economizar é mais inteligente.",
-      "Poupar é sempre bom, mas não se esqueça de se divertir também.",
-      "Generosidade é uma virtude, mas lembre-se de cuidar de si também."
-    ],
-    pontuacoes: [2, 3, 1],
-    categoria: ["foco", "financas", "saude"]
-  },
-  {
-    texto: "Você está no trabalho e recebe uma mensagem importante. O que faz?",
-    opcoes: ["Ignora e continua no seu ritmo", "Responde imediatamente, mesmo que o trabalho não esteja pronto", "Organiza suas prioridades e responde na hora certa"],
-    feedbacks: [
-      "Às vezes, ignorar pode ser uma escolha sábia.",
-      "A pressa pode gerar erros, tome cuidado.",
-      "Bom equilíbrio! Gerenciar prioridades é essencial."
-    ],
-    pontuacoes: [1, 2, 3],
-    categoria: ["foco", "foco", "saude"]
-  },
-  {
-    texto: "Você tem uma reunião importante e está sem inspiração. O que faz?",
-    opcoes: ["Pede ajuda a um colega e compartilha as ideias", "Se concentra e tenta achar uma solução sozinho", "Usa um pouco de humor para quebrar o gelo e começar a reunião"],
-    feedbacks: [
-      "Dividir ideias sempre ajuda a encontrar uma solução.",
-      "Concentração é importante, mas compartilhar também é.",
-      "Quebrar o gelo pode ser uma boa estratégia para relaxar."
-    ],
-    pontuacoes: [3, 2, 1],
-    categoria: ["foco", "foco", "saude"]
-  },
-  {
-    texto: "Você se depara com uma tarefa difícil. O que faz?",
-    opcoes: ["Adia a tarefa e finge que não existe", "Começa a tarefa com uma abordagem prática e focada", "Pede ajuda a alguém mais experiente para aprender mais rápido"],
-    feedbacks: [
-      "Procrastinação nunca é uma solução.",
-      "Foco e dedicação são essenciais para superar desafios.",
-      "Pedir ajuda é sempre uma boa maneira de aprender."
-    ],
-    pontuacoes: [0, 3, 2],
-    categoria: ["foco", "foco", "saude"]
-  },
-  {
-    texto: "Você tem que escolher entre trabalhar ou sair com amigos. O que faz?",
-    opcoes: ["Fica em casa e termina o trabalho", "Sai com os amigos e deixa o trabalho para depois", "Faz um equilíbrio: trabalha um pouco e depois se encontra com os amigos"],
-    feedbacks: [
-      "O trabalho é importante, mas também precisa de equilíbrio.",
-      "Socializar é bom, mas o trabalho também precisa de atenção.",
-      "Excelente escolha! Um bom equilíbrio é essencial."
-    ],
-    pontuacoes: [1, 2, 3],
-    categoria: ["foco", "foco", "saude"]
-  },
-  {
-    texto: "Você tem um projeto criativo, mas está sem ideias. O que faz?",
-    opcoes: ["Força uma ideia, mesmo que não esteja inspirado", "Dá um tempo e volta quando sentir mais inspiração", "Pede ajuda a alguém para gerar novas ideias"],
-    feedbacks: [
-      "Forçar a criatividade pode não ser produtivo.",
-      "Dar tempo ao processo criativo é sempre uma boa ideia.",
-      "Trocar ideias pode abrir novas perspectivas."
-    ],
-    pontuacoes: [1, 3, 2],
-    categoria: ["foco", "saude", "financas"]
-  },
-  {
-    texto: "Você tem um dia livre. O que faz?",
-    opcoes: ["Dorme até tarde e relaxa o dia todo", "Aproveita para aprender algo novo ou praticar um hobby", "Organiza a casa e coloca tudo em ordem"],
-    feedbacks: [
-      "Relaxar é bom, mas aprender algo novo pode ser mais satisfatório.",
-      "Hobbies são ótimos para manter o equilíbrio.",
-      "Organizar o ambiente traz uma sensação de bem-estar."
-    ],
-    pontuacoes: [0, 3, 2],
-    categoria: ["foco", "saude", "financas"]
-  },
-  {
-    texto: "Você está no cinema, mas o filme não é tão bom. O que faz?",
-    opcoes: ["Fica até o fim e tenta aproveitar ao máximo", "Levanta e vai embora, procurando algo melhor para fazer", "Fica no cinema, mas faz uma pausa para olhar o celular"],
-    feedbacks: [
-      "Persistência é boa, mas saber quando desistir também é importante.",
-      "Sair pode ser a melhor escolha se o filme não está valendo a pena.",
-      "Equilibrar entretenimento e foco é sempre uma boa estratégia."
-    ],
-    pontuacoes: [2, 0, 1],
-    categoria: ["saude", "foco", "financas"]
-  },
-  {
-    texto: "Você tem um prazo apertado para entregar um relatório. O que faz?",
-    opcoes: ["Trabalha sem parar até terminar", "Organiza uma estratégia e divide o trabalho em etapas", "Pede mais tempo e tenta relaxar antes de retomar"],
-    feedbacks: [
-      "Trabalhar sem parar pode ser prejudicial a longo prazo.",
-      "Dividir o trabalho facilita a execução de tarefas complexas.",
-      "Tentar relaxar é bom, mas não deixe o prazo fugir."
-    ],
-    pontuacoes: [0, 3, 2],
-    categoria: ["foco", "foco", "saude"]
-  },
-  {
-    texto: "Você tem um projeto importante e precisa de ajuda. O que faz?",
-    opcoes: ["Pede ajuda a um amigo ou colega", "Tenta resolver sozinho, mesmo sem saber como", "Busca soluções alternativas online"],
-    feedbacks: [
-      "Pedir ajuda pode ser mais eficiente do que tentar fazer tudo sozinho.",
-      "Tentar resolver sozinho é uma boa experiência, mas pode ser mais difícil.",
-      "Soluções alternativas podem ser uma forma criativa de resolver problemas."
-    ],
-    pontuacoes: [3, 1, 2],
-    categoria: ["foco", "saude", "financas"]
-  },
-  {
-    texto: "Você está no trabalho e alguém pede sua opinião sobre um projeto. O que faz?",
-    opcoes: ["Dá uma opinião rápida sem pensar muito", "Pensa com calma e dá uma resposta mais fundamentada", "Fica quieto e não se envolve"],
-    feedbacks: [
-      "Ser rápido pode ser útil, mas às vezes é bom refletir.",
-      "Refletir antes de opinar traz mais consistência à sua resposta.",
-      "Às vezes, se abster é uma boa forma de não comprometer sua posição."
-    ],
-    pontuacoes: [1, 3, 0],
-    categoria: ["foco", "foco", "saude"]
-  },
-  {
-    texto: "Você está com dificuldades para completar um projeto. O que faz?",
+    texto: "Você encontra uma carteira com dinheiro na rua. O que faz?",
     opcoes: [
-      "Deixa para amanhã e tenta descansar um pouco",
-      "Pede feedback a um colega para melhorar o projeto",
-      "Trabalha mais horas para tentar terminar o projeto sozinho"
+      "Leva para casa e guarda para si",
+      "Pega o dinheiro e joga a carteira fora",
+      "Leva à polícia",
+      "Tenta encontrar o dono pelas redes sociais",
+      "Ignora e continua seu caminho"
     ],
     feedbacks: [
-      "Às vezes é importante descansar, mas não deixe as coisas para última hora.",
-      "Pedir feedback pode te ajudar a melhorar e refinar o trabalho.",
-      "Trabalhar horas extras pode ajudar, mas o equilíbrio é essencial para qualidade."
+      "Não é ético ficar com o que não é seu.",
+      "Além de antiético, isso pode trazer consequências.",
+      "Ótima atitude! Ética em primeiro lugar.",
+      "Excelente! Proativo e ético.",
+      "Ignorar pode parecer neutro, mas é uma oportunidade perdida de fazer o bem."
     ],
-    pontuacoes: [1, 3, 2],
-    categoria: ["foco", "foco", "saude"]
+    pontuacoes: [-2, -1, 3, 2, 0],
+    categoria: ["ética", "ética", "ética", "ética", "ética"]
   },
   {
-    texto: "Você ganhou um aumento no trabalho. O que faz com o dinheiro extra?",
+    texto: "Seu amigo pede dinheiro emprestado. Você:",
     opcoes: [
-      "Compra algo que sempre quis, como um gadget novo",
-      "Investe em uma educação ou curso para melhorar suas habilidades",
-      "Coloca o dinheiro na poupança para o futuro"
+      "Empresta tudo que tem, mesmo sabendo que vai faltar para você",
+      "Diz que não pode ajudar e muda de assunto",
+      "Empresta uma parte e combina um prazo de devolução",
+      "Fala que ajuda, mas depois some",
+      "Sugere outras formas de ele conseguir ajuda"
     ],
     feedbacks: [
-      "É bom se presentear, mas investir em você também é uma escolha inteligente.",
-      "Investir no aprendizado é sempre uma boa escolha para o futuro.",
-      "Poupar é importante, mas não deixe de aproveitar um pouco também."
+      "Generosidade é boa, mas não se coloque em risco.",
+      "Ser direto pode ser necessário, mas falta empatia.",
+      "Responsável e solidário! Boa escolha.",
+      "Falta de compromisso quebra a confiança.",
+      "Criativo e solidário. Boa alternativa!"
     ],
-    pontuacoes: [2, 3, 1],
-    categoria: ["financas", "financas", "saude"]
+    pontuacoes: [0, -1, 3, -2, 2],
+    categoria: ["financas", "ética", "ética", "ética", "ética"]
+  },
+  {
+    texto: "Você precisa estudar, mas está muito cansado. O que faz?",
+    opcoes: [
+      "Força o estudo mesmo sem foco",
+      "Tira um cochilo curto e volta depois",
+      "Vai dormir e deixa para o dia seguinte",
+      "Tenta estudar enquanto vê TV",
+      "Toma café e segue estudando"
+    ],
+    feedbacks: [
+      "Sem foco, o estudo pode não render.",
+      "Boa! Descanso curto pode recuperar sua energia.",
+      "Cuidado com os prazos!",
+      "Multitarefa pode atrapalhar a concentração.",
+      "Pode funcionar, mas pode gerar ansiedade."
+    ],
+    pontuacoes: [0, 3, -1, -2, 1],
+    categoria: ["foco", "saude", "foco", "foco", "saude"]
+  },
+  {
+    texto: "Você quer economizar, mas aparece uma super promoção. Você:",
+    opcoes: [
+      "Compra sem pensar, afinal está barato",
+      "Avalia se realmente precisa",
+      "Compra e se arrepende depois",
+      "Espera e pesquisa mais sobre o produto",
+      "Decide não comprar para guardar o dinheiro"
+    ],
+    feedbacks: [
+      "Promoções são tentadoras, mas cuidado!",
+      "Refletir é sinal de inteligência financeira.",
+      "Impulsividade custa caro.",
+      "Ótima estratégia!",
+      "Excelente controle financeiro!"
+    ],
+    pontuacoes: [-2, 2, -1, 1, 3],
+    categoria: ["financas", "financas", "financas", "financas", "financas"]
+  },
+  {
+    texto: "Você vê alguém sofrendo bullying. Qual sua reação?",
+    opcoes: [
+      "Finge que não viu",
+      "Rir junto para não ser alvo",
+      "Chama um responsável ou autoridade",
+      "Conversa com a vítima depois",
+      "Enfrenta os agressores na hora"
+    ],
+    feedbacks: [
+      "O silêncio também é uma forma de conivência.",
+      "Isso alimenta o ciclo de agressão.",
+      "Boa! Procurar ajuda é essencial.",
+      "Empático, mas poderia ser mais ativo.",
+      "Corajoso, mas cuidado com sua segurança."
+    ],
+    pontuacoes: [-1, -2, 3, 1, 2],
+    categoria: ["ética", "ética", "ética", "ética", "ética"]
+  },
+  {
+    texto: "Você tem um compromisso e está atrasado. O que faz?",
+    opcoes: [
+      "Mente dizendo que está a caminho",
+      "Avisa que vai se atrasar e pede desculpas",
+      "Finge que esqueceu",
+      "Chega correndo e sem se preparar",
+      "Remarca o compromisso"
+    ],
+    feedbacks: [
+      "Mentir pode comprometer sua credibilidade.",
+      "Boa comunicação mantém a confiança.",
+      "Falta de responsabilidade!",
+      "Chegar despreparado compromete a qualidade.",
+      "Boa opção, mas cuidado para não virar hábito."
+    ],
+    pontuacoes: [-1, 3, -2, 0, 1],
+    categoria: ["ética", "ética", "ética", "foco", "foco"]
+  },
+  {
+    texto: "Você acorda desmotivado. O que faz?",
+    opcoes: [
+      "Volta a dormir e esquece do dia",
+      "Levanta e toma um banho energizante",
+      "Faz uma caminhada curta",
+      "Liga para um amigo para conversar",
+      "Assiste algo para se distrair"
+    ],
+    feedbacks: [
+      "Fugir pode piorar seu estado emocional.",
+      "Boa forma de energizar!",
+      "Movimento ajuda a liberar energia positiva.",
+      "Conexões humanas ajudam muito.",
+      "Entretenimento pode aliviar, mas cuidado com a procrastinação."
+    ],
+    pontuacoes: [-1, 3, 2, 1, 0],
+    categoria: ["saude", "saude", "saude", "saude", "saude"]
+  },
+  {
+    texto: "Você precisa se alimentar melhor. O que faz?",
+    opcoes: [
+      "Come tudo que vê pela frente",
+      "Tenta cozinhar algo saudável",
+      "Compra comida saudável pronta",
+      "Faz jejum para compensar excessos",
+      "Consulta um nutricionista"
+    ],
+    feedbacks: [
+      "Alimentação descontrolada afeta sua saúde.",
+      "Boa tentativa de mudança!",
+      "Prático e saudável!",
+      "Jejum sem orientação pode ser perigoso.",
+      "Melhor decisão a longo prazo!"
+    ],
+    pontuacoes: [-2, 2, 1, -1, 3],
+    categoria: ["saude", "saude", "saude", "saude", "saude"]
+  },
+  {
+    texto: "Você tem uma promoção para investir em ações de uma empresa. O que faz?",
+    opcoes: [
+      "Investe tudo, acreditando que vai valorizar rapidamente",
+      "Faz uma pesquisa detalhada antes de decidir",
+      "Evita investir por medo de perder dinheiro",
+      "Consulta um especialista antes de tomar a decisão",
+      "Investe apenas uma parte para minimizar o risco"
+    ],
+    feedbacks: [
+      "Investir sem cautela pode ser arriscado.",
+      "Pesquisa é a chave para uma decisão bem-informada.",
+      "O medo pode te impedir de aproveitar boas oportunidades.",
+      "Consultar um especialista é sempre uma boa prática.",
+      "Diversificar é uma boa estratégia para reduzir riscos."
+    ],
+    pontuacoes: [1, 3, -2, 2, 0],
+    categoria: ["financas", "financas", "financas", "financas", "financas"]
+  },
+  {
+    texto: "Você recebe uma crítica. Como reage?",
+    opcoes: [
+      "Ignora e segue como se nada tivesse acontecido",
+      "Revida com outra crítica",
+      "Escuta e tenta entender",
+      "Fica chateado mas reflete depois",
+      "Muda seu comportamento com base no que ouviu"
+    ],
+    feedbacks: [
+      "Fingir que não escutou não resolve nada.",
+      "Responder com crítica raramente é construtivo.",
+      "Boa escuta é fundamental.",
+      "Nem sempre é fácil, mas refletir é um bom caminho.",
+      "Ótima evolução pessoal!"
+    ],
+    pontuacoes: [0, -1, 2, 1, 3],
+    categoria: ["ética", "ética", "foco", "ética", "ética"]
+  },
+  {
+    texto: "Você precisa fazer um trabalho em grupo. O que faz?",
+    opcoes: [
+      "Faz tudo sozinho",
+      "Divide tudo igualmente",
+      "Fica esperando os outros fazerem",
+      "Tenta organizar e motivar o grupo",
+      "Ignora o grupo e entrega qualquer coisa"
+    ],
+    feedbacks: [
+      "Isso sobrecarrega você e impede aprendizado em grupo.",
+      "Boa divisão de tarefas mostra responsabilidade.",
+      "Falta de iniciativa afeta o grupo todo.",
+      "Liderança positiva é excelente!",
+      "Entregar de qualquer jeito compromete o resultado."
+    ],
+    pontuacoes: [0, 2, -1, 3, -2],
+    categoria: ["foco", "ética", "foco", "foco", "ética"]
+  },
+  {
+    texto: "Você pode fazer uma doação. O que decide?",
+    opcoes: [
+      "Doa um valor simbólico",
+      "Ajuda com tempo em vez de dinheiro",
+      "Doa uma quantia generosa",
+      "Divulga para que mais pessoas ajudem",
+      "Não faz nada"
+    ],
+    feedbacks: [
+      "Cada gesto conta.",
+      "Tempo também é valioso.",
+      "Muito generoso!",
+      "Divulgar é uma ótima forma de mobilizar.",
+      "Omissão também é uma escolha."
+    ],
+    pontuacoes: [1, 2, 3, 2, -1],
+    categoria: ["ética", "ética", "ética", "ética", "ética"]
+  },
+  {
+    texto: "Você tem pouco tempo para estudar. O que faz?",
+    opcoes: [
+      "Desiste e tenta no próximo dia",
+      "Estuda o essencial com foco total",
+      "Lê rapidamente todo o conteúdo",
+      "Pede ajuda para alguém explicar",
+      "Usa IA para resumir os tópicos"
+    ],
+    feedbacks: [
+      "Deixar para depois pode virar hábito.",
+      "Foco é tudo! Boa escolha.",
+      "Cuidado com a superficialidade.",
+      "Boa! Aprender com outros pode ser eficiente.",
+      "A tecnologia pode ser uma grande aliada."
+    ],
+    pontuacoes: [-1, 3, 1, 2, 2],
+    categoria: ["foco", "foco", "foco", "foco", "foco"]
+  },
+  {
+    texto: "Você pensa em trocar de emprego. O que considera?",
+    opcoes: [
+      "Sai sem ter outro plano",
+      "Faz um planejamento financeiro antes",
+      "Conversa com amigos da área",
+      "Atualiza seu currículo e começa a aplicar",
+      "Ignora o incômodo e continua no mesmo lugar"
+    ],
+    feedbacks: [
+      "Impulsividade pode trazer riscos.",
+      "Boa! Segurança financeira é essencial.",
+      "Buscar opiniões é sábio.",
+      "Ótima forma de agir!",
+      "Ignorar pode aumentar sua frustração."
+    ],
+    pontuacoes: [-1, 3, 2, 2, -2],
+    categoria: ["financas", "financas", "financas", "financas", "financas"]
+  },
+  {
+    texto: "Você precisa escolher entre um plano de saúde barato e um caro. O que faz?",
+    opcoes: [
+      "Escolhe o mais barato e torce para não precisar",
+      "Analisa custo-benefício e decide com base nisso",
+      "Vai pelo mais caro achando que é o melhor",
+      "Consulta alguém da área para ajudar",
+      "Fica sem plano para economizar"
+    ],
+    feedbacks: [
+      "Economia pode sair caro depois.",
+      "Excelente análise racional!",
+      "Nem sempre o mais caro é o melhor.",
+      "Buscar orientação é uma ótima decisão.",
+      "Ficar sem plano pode ser perigoso."
+    ],
+    pontuacoes: [0, 3, 1, 2, -2],
+    categoria: ["financas", "financas", "financas", "financas", "saude"]
   }
 ];
 
@@ -203,18 +316,19 @@ const ctx = document.getElementById('progressoGrafico').getContext('2d');
 const grafico = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ['Saúde', 'Foco', 'Finanças'],
+    labels: ['Ética', 'Finanças', 'Saúde','Foco'],
     datasets: [{
       label: 'Evolução do Personagem',
-      data: [progresso.saude, progresso.foco, progresso.financas],
-      backgroundColor: ['#4CAF50', '#2196F3', '#FFC107']
+      data: [progresso.ética, progresso.financas, progresso.saude, progresso.foco],
+      backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#FF5722'],
     }]
   },
   options: {
     scales: {
       y: {
         beginAtZero: true,
-        max: 20
+        max: 20,
+        min:-10
       }
     }
   }
@@ -222,9 +336,11 @@ const grafico = new Chart(ctx, {
 
 function atualizarGrafico() {
   grafico.data.datasets[0].data = [
+    progresso.ética,
+    progresso.financas,
     progresso.saude,
     progresso.foco,
-    progresso.financas
+    
   ];
   grafico.update();
 }
@@ -269,7 +385,7 @@ confirmButton.addEventListener("click", () => {
   atualizarGrafico();
 
   feedback.innerHTML = `<p>${mensagemFeedback}</p> 
-                          <p>Pontos ganhos: +${perguntas[perguntaAtual].pontuacoes[opcaoIndex]}
+                          <p>Pontos ganhos: ${perguntas[perguntaAtual].pontuacoes[opcaoIndex]}
                           <p>Pontuação atual: ${pontosTotais}`;
   feedback.classList.remove("hidden");
 
