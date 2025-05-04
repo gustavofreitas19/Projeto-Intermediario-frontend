@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decide Ai</title>
+  <link rel="stylesheet" href="../game_files/style_game.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="game-container">
+    <h1>Decide Aí!</h1>
+
+    <div id="question-container">
+      <p id="question">Você tem 2 horas livres à noite. O que faz?</p>
+      <canvas id="progressoGrafico" class="grafico-estilo" width="400" height="200"></canvas>
+
+      <div class="options">
+        <label><input type="radio" name="option" value="A"> Assistir uma série</label>
+        <label><input type="radio" name="option" value="B"> Organizar as finanças</label>
+        <label><input type="radio" name="option" value="C"> Fazer exercício</label>
+      </div>
+      <div>
+        <h1 id="question-titulo"></h1>
+        <div class="options"></div>
+        <button id="confirm-button">Confirmar</button>
+        <div id="feedback" class="hidden"></div>
+        <div class="loader" id="loader-confirm"></div>
+        <p id="contador-perguntas">1 / 15</p>
+      </div>
+      <button id="resetarProgresso">Resetar Progresso</button>
+
+      <div id="feedback" class="hidden"></div>
+    
+      <button onclick="retornaApiConselho()">Obter Conselho</button> 
+      
+      <div class="dica-api">
+        <p id="resposta-api"></p>
+      </div>
+    </div>
+
+    <script src="../game_files/script.js"></script>
+</body>
+
+</html>

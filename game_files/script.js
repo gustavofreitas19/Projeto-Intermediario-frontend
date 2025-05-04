@@ -198,8 +198,8 @@ const loader = document.getElementById("loader-confirm");
 const confirmButton = document.getElementById("confirm-button");
 const pontosDisplay = document.getElementById("pontos");
 const contadorPerguntasElement = document.getElementById("contador-perguntas");
-
 const ctx = document.getElementById('progressoGrafico').getContext('2d');
+
 const grafico = new Chart(ctx, {
   type: 'bar',
   data: {
@@ -268,15 +268,27 @@ confirmButton.addEventListener("click", () => {
   progresso[categoriaAfetada] += perguntas[perguntaAtual].pontuacoes[opcaoIndex];
   atualizarGrafico();
 
-  feedback.textContent = `${mensagemFeedback} Pontuação: ${pontosTotais}`;
+  feedback.innerHTML = `<p>${mensagemFeedback}</p> 
+                          <p>Pontos ganhos: +${perguntas[perguntaAtual].pontuacoes[opcaoIndex]}
+                          <p>Pontuação atual: ${pontosTotais}`;
   feedback.classList.remove("hidden");
 
+  confirmButton.disabled = true;
   loader.classList.add('active');
+  retornaApiConselho();
+  
+  if (perguntas[perguntaAtual].pontuacoes[opcaoIndex] <= 1){
+    buscarEmoji('negative');  
+  } else {
+    buscarEmoji('positive');
+  }
+
   setTimeout(() => {
     perguntaAtual++;
 
     if (perguntaAtual < perguntas.length) {
       loader.classList.remove('active');
+      confirmButton.disabled = false;
       mostrarPergunta(perguntaAtual);  // Mostra a próxima pergunta
     } else {
       questionElement.textContent = "Fim do jogo! Obrigado por jogar.";
@@ -304,3 +316,35 @@ document.getElementById("resetarProgresso").addEventListener("click", () => {
   localStorage.removeItem("decidaAiProgresso");
   location.reload(); // Recarrega a página
 });
+
+const conselhoTexto = document.querySelector('#resposta-api');
+
+function retornaApiConselho() {
+  const url = 'https://api.adviceslip.com/advice';
+
+  fetch(url)
+    .then(resposta => resposta.json())
+    .then(dados => {
+      conselhoTexto.innerText = `💡 Conselho: "${dados.slip.advice}"`;
+    })
+    .catch(erro => {
+      conselhoTexto.innerText = "Não foi possível carregar um conselho agora.";
+      console.error("Erro ao buscar conselho:", erro);
+    });
+}
+
+function buscarEmoji(emocao) {
+  const url = 'https://emojihub.yurace.pro/api/random'
+  const uri = '/group/face ' + emocao
+  fetch(url+uri)
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.htmlCode && data.htmlCode[0]) {
+        const emoji = data.htmlCode[0]; // HTML entity do emoji
+        feedback.innerHTML +=  `  ${ emoji }`; // Adiciona ao feedback
+      }
+    })
+    .catch(error => {
+      console.error("Erro ao buscar emoji:", error);
+    });
+}      
