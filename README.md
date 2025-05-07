@@ -6,7 +6,7 @@ Objetivo real:
 Ensinar e treinar o usuario a tomar melhores decisoes de forma rapida, consciente e divertida usando situacoes reais simuladas.
 
 Exemplo de gameplay:
--	Situacao: Voce tem 2 horas livres a noite. O que faz?
+	Situacao: Voce tem 2 horas livres a noite. O que faz?
 -	Opcao A: Assiste uma serie.
 -	Opcao B: Organiza as financas.
 -	Opcao C: Faz exercicio.
@@ -22,9 +22,9 @@ Funcionalidades:
 -	Feedback educativo ao final de cada escolha.
 
 Api's:
-- Adviceslip: 
-- Emojihub:
-- Chart: 
+- Adviceslip: 'https://api.adviceslip.com/advice' (Responsavél Pelos Conselhos)
+- Emojihub: 'https://emojihub.yurace.pro/api/random' (Respondavél Pelos Emojis)
+- Chart: "https://cdn.jsdelivr.net/npm/chart.js" (Responsavél Pelo Grafico)
 
 Tecnologia:
 -	HTML/CSS para interface estilizada como jogo.
