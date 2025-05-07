@@ -17,17 +17,6 @@ body {
     align-items: center;
 }
 
-/* Container principal do jogo */
-.game-container {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 40px 30px;
-    max-width: 600px;
-    width: 100%;
-    margin: auto;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
 /* Botões estilizados */
 button {
     background-color: #00aaff;
@@ -54,6 +43,17 @@ button:disabled {
     cursor: not-allowed;
     border: 2px dashed #aaa;
     opacity: 0.6;
+}
+
+/* Container principal do jogo */
+.game-container {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 40px 30px;
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilo das opções */
@@ -91,23 +91,6 @@ button:disabled {
     animation: animarLoader 10s infinite;
 }
 
-@keyframes animarLoader {
-    0%, 10% {
-        transform: scaleX(0);
-    }
-    80%, 100% {
-        transform: scaleX(1);
-    }
-}
-
-/* Feedback ao usuário */
-#feedback {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 18px;
-    color: #00aaff;
-}
-
 /* Esconde elementos */
 .hidden {
     display: none;
@@ -130,3 +113,19 @@ button:disabled {
     margin-top: 20px;
 }
 
+/* Feedback ao usuário */
+#feedback {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #00aaff;
+}
+
+@keyframes animarLoader {
+    0%, 10% {
+        transform: scaleX(0);
+    }
+    80%, 100% {
+        transform: scaleX(1);
+    }
+}

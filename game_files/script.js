@@ -1,11 +1,25 @@
+const pontuacaoSalva = localStorage.getItem("decidaAiPontuacao");
+const progressoSalvo = localStorage.getItem("decidaAiProgresso");
+let perguntaAtual = 0;
+let pontosTotais = 0;
+
+const questionElement = document.getElementById("question");
+const optionsContainer = document.querySelector(".options");
+const feedback = document.getElementById("feedback");
+const loader = document.getElementById("loader-confirm");
+const confirmButton = document.getElementById("confirm-button");
+const pontosDisplay = document.getElementById("pontos");
+const contadorPerguntasElement = document.getElementById("contador-perguntas");
+const ctx = document.getElementById('progressoGrafico').getContext('2d');
+
+const conselhoTexto = document.querySelector('#resposta-api');
+
 let progresso = {
   saude: 0,
   foco: 0,
   financas: 0,
   ética: 0
 };
-const pontuacaoSalva = localStorage.getItem("decidaAiPontuacao");
-const progressoSalvo = localStorage.getItem("decidaAiProgresso");
 
 if (pontuacaoSalva && progressoSalvo) {
   pontosTotais = parseInt(pontuacaoSalva);
@@ -301,18 +315,6 @@ const perguntas = [
   }
 ];
 
-let perguntaAtual = 0;
-let pontosTotais = 0;
-
-const questionElement = document.getElementById("question");
-const optionsContainer = document.querySelector(".options");
-const feedback = document.getElementById("feedback");
-const loader = document.getElementById("loader-confirm");
-const confirmButton = document.getElementById("confirm-button");
-const pontosDisplay = document.getElementById("pontos");
-const contadorPerguntasElement = document.getElementById("contador-perguntas");
-const ctx = document.getElementById('progressoGrafico').getContext('2d');
-
 const grafico = new Chart(ctx, {
   type: 'bar',
   data: {
@@ -433,7 +435,6 @@ document.getElementById("resetarProgresso").addEventListener("click", () => {
   location.reload(); // Recarrega a página
 });
 
-const conselhoTexto = document.querySelector('#resposta-api');
 
 function retornaApiConselho() {
   const url = 'https://api.adviceslip.com/advice';
