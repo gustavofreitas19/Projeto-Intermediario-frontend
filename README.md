@@ -24,7 +24,7 @@ Funcionalidades:
 Api's:
 - Adviceslip: 'https://api.adviceslip.com/advice' (Responsável Pelos Conselhos)
 - Emojihub: 'https://emojihub.yurace.pro/api/random' (Responsável Pelos Emojis)
-- Chart: "https://cdn.jsdelivr.net/npm/chart.js" (Responsável Pelo Grafico)
+- Chart: ["https://cdn.jsdelivr.net/npm/chart.js"](https://github.com/chartjs/Chart.js) (Responsável Pelo Grafico)
 
 Tecnologia:
 -	HTML/CSS para interface estilizada como jogo.
