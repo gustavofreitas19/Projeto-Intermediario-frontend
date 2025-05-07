@@ -22,9 +22,9 @@ Funcionalidades:
 -	Feedback educativo ao final de cada escolha.
 
 Api's:
-- Adviceslip: 'https://api.adviceslip.com/advice' (Responsavél Pelos Conselhos)
-- Emojihub: 'https://emojihub.yurace.pro/api/random' (Respondavél Pelos Emojis)
-- Chart: "https://cdn.jsdelivr.net/npm/chart.js" (Responsavél Pelo Grafico)
+- Adviceslip: 'https://api.adviceslip.com/advice' (Responsável Pelos Conselhos)
+- Emojihub: 'https://emojihub.yurace.pro/api/random' (Responsávl Pelos Emojis)
+- Chart: "https://cdn.jsdelivr.net/npm/chart.js" (Responsável Pelo Grafico)
 
 Tecnologia:
 -	HTML/CSS para interface estilizada como jogo.
