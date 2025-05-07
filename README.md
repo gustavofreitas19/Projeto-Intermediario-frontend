@@ -22,7 +22,7 @@ Funcionalidades:
 -	Feedback educativo ao final de cada escolha.
 
 Api's:
-- Adviceslip: 'https://api.adviceslip.com/advice' (Responsável Pelos Conselhos)
+- Adviceslip: [https://api.adviceslip.com/advice](https://api.adviceslip.com/) (Responsável Pelos Conselhos)
 - Emojihub: [https://emojihub.yurace.pro/api/random](https://github.com/cheatsnake/emojihub) (Responsável Pelos Emojis)
 - Chart: ["https://cdn.jsdelivr.net/npm/chart.js"](https://github.com/chartjs/Chart.js) (Responsável Pelo Grafico)
 
